@@ -14,11 +14,13 @@ namespace TrashCollector.Models
         public DateTime Date { get; set; }
         public bool Completed { get; set; }
         
+        
+        [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
-        [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
+       
+        [ForeignKey("Customer")]
         public int CustomerId { get; set; }
-        [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }
     }
 }
