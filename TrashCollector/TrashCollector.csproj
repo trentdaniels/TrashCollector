@@ -204,6 +204,10 @@
     <Compile Include="Migrations\201808281646220_UpdatedCustomer.Designer.cs">
       <DependentUpon>201808281646220_UpdatedCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808281923336_resetValues.cs" />
+    <Compile Include="Migrations\201808281923336_resetValues.Designer.cs">
+      <DependentUpon>201808281923336_resetValues.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -293,6 +297,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808281646220_UpdatedCustomer.resx">
       <DependentUpon>201808281646220_UpdatedCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808281923336_resetValues.resx">
+      <DependentUpon>201808281923336_resetValues.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
