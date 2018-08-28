@@ -35,21 +35,7 @@ namespace TrashCollector
                 roleManager.Create(customerRole);
             }
         }
-        private void CreateSuperUser()
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            var user = new ApplicationUser();
-            user.UserName = "admin";
-            user.Email = "testadmin@test.com";
-            string userPassword = "admin";
-            var checkUser = userManager.Create(user, userPassword);
-
-            if (checkUser.Succeeded)
-            {
-                var result = userManager.AddToRole(user.Id, "Employee");
-            }
-        }
+        
     }
 
    
