@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class resetValues : IMigrationMetadata
+    public sealed partial class PluralTables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(resetValues));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PluralTables));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808281923336_resetValues"; }
+            get { return "201808281942511_PluralTables"; }
         }
         
         string IMigrationMetadata.Source
