@@ -73,7 +73,7 @@ namespace TrashCollector.Controllers
                 var selectedCustomer = db.Customers.Find(id);
                 db.Entry(selectedCustomer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = selectedCustomer.Id });
             }
             catch
             {
