@@ -157,9 +157,8 @@ namespace TrashCollector.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "Customer");
-                    CreateCustomer(user);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Create", "Customer", new { id = user.Id});
                 }
                 AddErrors(result);
             }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
@@ -28,11 +30,21 @@ namespace TrashCollector.Controllers
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FormCollection collection, string id)
         {
             try
             {
-                // TODO: Add insert logic here
+                ApplicationDbContext db = new ApplicationDbContext();
+                Customer newCustomer = new Customer()
+                {
+                    ApplicationUserId = id,
+                    Name = collection["Name"],
+                    Address = collection["Address"],
+                    ZipCode = int.Parse(collection["ZipCode"]),
+                    PickupDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), collection["PickupDay"], true)
+                };
+                db.Customers.Add(newCustomer);
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -54,8 +66,10 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                // TODO: Add update logic here
-
+                ApplicationDbContext db = new ApplicationDbContext();
+                var selectedCustomer = db.Customers.Find(id);
+                db.Entry(selectedCustomer).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
