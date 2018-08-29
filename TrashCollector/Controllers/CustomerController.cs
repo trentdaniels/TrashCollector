@@ -15,13 +15,15 @@ namespace TrashCollector.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var selectedCustomer = db.Customers.Find(id);
-            return View(id);
+            return View(selectedCustomer);
         }
 
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var selectedCustomer = db.Customers.Find(id);
+            return View(selectedCustomer);
         }
 
         // GET: Customer/Create
