@@ -478,11 +478,22 @@ namespace TrashCollector.Controllers
 
         private ActionResult RedirectToLocal(ApplicationUser user)
         {
-            
-            // GET ROLE FOR USER IN IF STATEMENT - TO DO
             ApplicationDbContext db = new ApplicationDbContext();
-            var selectedCustomer = db.Customers.SingleOrDefault(Customer => Customer.ApplicationUserId == user.Id);
-            return RedirectToAction("Index", "Customer", new { id = selectedCustomer.Id });
+            if (UserManager.IsInRole(user.Id, "Customer"))
+            {
+                var selectedCustomer = db.Customers.SingleOrDefault(Customer => Customer.ApplicationUserId == user.Id);
+                return RedirectToAction("Index", "Customer", new { id = selectedCustomer.Id });
+            }
+            else if (UserManager.IsInRole(user.Id, "Employee"))
+            {
+                var selectedEmployee = db.Employees.SingleOrDefault(Employee => Employee.ApplicationUserId == user.Id);
+                return RedirectToAction("Index", "Employee", new { id = selectedEmployee.Id });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
