@@ -62,7 +62,9 @@ namespace TrashCollector.Controllers
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var customerToEdit = db.Customers.Find(id);
+            return View(customerToEdit);
         }
 
         // POST: Customer/Edit/5
@@ -82,29 +84,36 @@ namespace TrashCollector.Controllers
             }
             catch
             {
-                return View();
+                return View(customer);
             }
         }
 
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var customerToDelete = db.Customers.Find(id);
+            return View(customerToDelete);
         }
 
         // POST: Customer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Customer customer)
         {
             try
             {
-                // TODO: Add delete logic here
+                ApplicationDbContext db = new ApplicationDbContext();
+                var customerInDb = db.Customers.Find(customer.Id);
+                var userInDb = db.Users.Find(customerInDb.ApplicationUserId);
+                db.Users.Remove(userInDb);
+                db.Customers.Remove(customerInDb);
+                db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
-                return View();
+                return View(customer);
             }
         }
     }

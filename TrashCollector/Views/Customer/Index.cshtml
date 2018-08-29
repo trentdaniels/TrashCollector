@@ -39,7 +39,7 @@
                         We know you don't want to do this, but you can begin your
                         account deletion process by clicking below. We'd hate to see you go!
                     </p>
-                    @Html.ActionLink("Delete Account", "Delete", "Customer", null, new { @class = "card-link btn btn-default" })
+                    @Html.ActionLink("Delete Account", "Delete", "Customer", new { id = Model.Id }, new { @class = "card-link btn btn-default" })
                 </div>
             </div>
         </div>

@@ -79,7 +79,10 @@ namespace TrashCollector.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    ApplicationDbContext db = new ApplicationDbContext();
+                    var selectedUser = db.Users.SingleOrDefault(User => User.Email == model.Email);
+                    //IF STATEMENT TO CHECK FOR USER ROLE ON LOGIN TO DO
+                    return RedirectToLocal(returnUrl, selectedUser);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -115,7 +118,6 @@ namespace TrashCollector.Controllers
             {
                 return View(model);
             }
-
             // The following code protects for brute force attacks against the two factor codes. 
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
@@ -465,7 +467,21 @@ namespace TrashCollector.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Customer");
+            
+            
+            return RedirectToAction("Index");
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl, ApplicationUser user)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            // GET ROLE FOR USER IN IF STATEMENT - TO DO
+            ApplicationDbContext db = new ApplicationDbContext();
+            var selectedCustomer = db.Customers.SingleOrDefault(Customer => Customer.ApplicationUserId == user.Id);
+            return RedirectToAction("Index", "Customer", new { id = selectedCustomer.Id });
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
