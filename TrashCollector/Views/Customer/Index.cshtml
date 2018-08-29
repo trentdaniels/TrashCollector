@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
 }
 <h2>Index</h2>
+@Html.HiddenFor(Model => Model.Id)
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -11,6 +12,7 @@
                     <h3 class="card-title">Account Details</h3>
                     <p class="card-text">See your account information by clicking below.
                     You are able to view everything about you... and we do mean EVERYTHING.</p>
+                    @Html.ActionLink("Account Details", "Read", "Customer", null, new { @class = "card-link btn btn-default"})
                 </div>
             </div>
         </div>
@@ -19,9 +21,12 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">Edit Account</h3>
-                    <p class="card-text">Edit you account by clicking here! You are able to
-                    edit your name, address, zipcode, pickup day, and any other special
-                    requests below.</p>
+                    <p class="card-text">
+                        Edit you account by clicking here! You are able to
+                        edit your name, address, zipcode, pickup day, and any other special
+                        requests below.
+                    </p>
+                    @Html.ActionLink("Edit Account", "Edit", "Customer",new { id = Model.Id }, new { @class = "card-link btn btn-default" })
                 </div>
             </div>
         </div>
@@ -30,8 +35,11 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">Delete Account</h3>
-                    <p class="card-text">We know you don't want to do this, but you can begin your
-                    account deletion process by clicking below. We'd hate to see you go!</p>
+                    <p class="card-text">
+                        We know you don't want to do this, but you can begin your
+                        account deletion process by clicking below. We'd hate to see you go!
+                    </p>
+                    @Html.ActionLink("Delete Account", "Delete", "Customer", null, new { @class = "card-link btn btn-default" })
                 </div>
             </div>
         </div>
