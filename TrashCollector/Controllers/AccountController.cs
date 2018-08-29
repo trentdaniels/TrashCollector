@@ -83,7 +83,7 @@ namespace TrashCollector.Controllers
                     var selectedUser = db.Users.SingleOrDefault(User => User.Email == model.Email);
                     if (selectedUser != null)
                     {
-                        return RedirectToLocal(returnUrl, selectedUser);
+                        return RedirectToLocal(selectedUser);
                     }
                     //IF STATEMENT TO CHECK FOR USER ROLE ON LOGIN TO DO
                     return RedirectToLocal(returnUrl);
@@ -476,12 +476,9 @@ namespace TrashCollector.Controllers
             return RedirectToAction("Index");
         }
 
-        private ActionResult RedirectToLocal(string returnUrl, ApplicationUser user)
+        private ActionResult RedirectToLocal(ApplicationUser user)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
+            
             // GET ROLE FOR USER IN IF STATEMENT - TO DO
             ApplicationDbContext db = new ApplicationDbContext();
             var selectedCustomer = db.Customers.SingleOrDefault(Customer => Customer.ApplicationUserId == user.Id);
