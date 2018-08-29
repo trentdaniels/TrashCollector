@@ -81,8 +81,12 @@ namespace TrashCollector.Controllers
                 case SignInStatus.Success:
                     ApplicationDbContext db = new ApplicationDbContext();
                     var selectedUser = db.Users.SingleOrDefault(User => User.Email == model.Email);
+                    if (selectedUser != null)
+                    {
+                        return RedirectToLocal(returnUrl, selectedUser);
+                    }
                     //IF STATEMENT TO CHECK FOR USER ROLE ON LOGIN TO DO
-                    return RedirectToLocal(returnUrl, selectedUser);
+                    return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
