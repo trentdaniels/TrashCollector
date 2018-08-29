@@ -15,7 +15,7 @@ namespace TrashCollector.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var selectedCustomer = db.Customers.Find(id);
-            return View(selectedCustomer);
+            return View(id);
         }
 
         // GET: Customer/Details/5
@@ -65,15 +65,18 @@ namespace TrashCollector.Controllers
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Customer customer)
         {
             try
             {
                 ApplicationDbContext db = new ApplicationDbContext();
-                var selectedCustomer = db.Customers.Find(id);
-                db.Entry(selectedCustomer).State = EntityState.Modified;
+                var customerInDb = db.Customers.SingleOrDefault(Customer => Customer.Id == customer.Id);
+                customerInDb.Name = customer.Name;
+                customerInDb.Address = customer.Address;
+                customerInDb.ZipCode = customer.ZipCode;
+                customerInDb.PickupDay = customer.PickupDay;
                 db.SaveChanges();
-                return RedirectToAction("Index", new { id = selectedCustomer.Id });
+                return RedirectToAction("Index", new { id = customer.Id });
             }
             catch
             {
