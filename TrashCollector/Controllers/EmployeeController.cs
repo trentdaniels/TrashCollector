@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var selectedEmployee = db.Employees.Find(id);
+            var nearbyCustomers = db.Customers.Where(Customer => Customer.ZipCode == selectedEmployee.ZipCode).ToList();
+            return View(nearbyCustomers);
         }
 
         // GET: Employee/Details/5
@@ -28,11 +32,19 @@ namespace TrashCollector.Controllers
 
         // POST: Employee/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FormCollection collection, string id)
         {
             try
             {
-                // TODO: Add insert logic here
+                ApplicationDbContext db = new ApplicationDbContext();
+                Employee newEmployee = new Employee()
+                {
+                    ApplicationUserId = id,
+                    Name = collection["Name"],
+                    ZipCode = int.Parse(collection["ZipCode"])
+                };
+                db.Employees.Add(newEmployee);
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
