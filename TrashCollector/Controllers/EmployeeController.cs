@@ -46,7 +46,8 @@ namespace TrashCollector.Controllers
                 db.Employees.Add(newEmployee);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                var employeeId = db.Employees.SingleOrDefault(Employee => Employee.ApplicationUserId == id).Id;
+                return RedirectToAction("Index", new { id = employeeId });
             }
             catch
             {
@@ -57,22 +58,27 @@ namespace TrashCollector.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var employeeToEdit = db.Employees.Find(id);
+            return View(employeeToEdit);
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Employee employee)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                ApplicationDbContext db = new ApplicationDbContext();
+                var employeeToEdit = db.Employees.SingleOrDefault(Employee => Employee.Id == employee.Id);
+                employeeToEdit.Name = employee.Name;
+                employeeToEdit.ZipCode = employee.ZipCode;
+                db.SaveChanges();
+                return RedirectToAction("Index", new { id = employee.Id });
             }
             catch
             {
-                return View();
+                return View(employee);
             }
         }
 
