@@ -3,7 +3,7 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class PluralTables : DbMigration
+    public partial class DeletedNullCustomers : DbMigration
     {
         public override void Up()
         {

@@ -45,6 +45,8 @@ namespace TrashCollector.Controllers
                     Name = collection["Name"],
                     Address = collection["Address"],
                     ZipCode = int.Parse(collection["ZipCode"]),
+                    StartDate = Convert.ToDateTime(collection["StartDate"]),
+                    EndDate = Convert.ToDateTime(collection["EndDate"]),
                     PickupDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), collection["PickupDay"], true)
                 };
                 db.Customers.Add(newCustomer);

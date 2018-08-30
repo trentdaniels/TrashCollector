@@ -14,7 +14,8 @@ namespace TrashCollector.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var selectedEmployee = db.Employees.Find(id);
-            var nearbyCustomers = db.Customers.Where(Customer => Customer.ZipCode == selectedEmployee.ZipCode).ToList();
+            var today = DateTime.Today.DayOfWeek;
+            var nearbyCustomers = db.Customers.Where(Customer => Customer.ZipCode == selectedEmployee.ZipCode &&  today == Customer.PickupDay).ToList();
             return View(nearbyCustomers);
         }
 

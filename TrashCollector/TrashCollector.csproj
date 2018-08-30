@@ -202,9 +202,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808281942511_PluralTables.cs" />
-    <Compile Include="Migrations\201808281942511_PluralTables.Designer.cs">
-      <DependentUpon>201808281942511_PluralTables.cs</DependentUpon>
+    <Compile Include="Migrations\201808301359281_DeletedNullCustomers.cs" />
+    <Compile Include="Migrations\201808301359281_DeletedNullCustomers.Designer.cs">
+      <DependentUpon>201808301359281_DeletedNullCustomers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -300,8 +300,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808281942511_PluralTables.resx">
-      <DependentUpon>201808281942511_PluralTables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808301359281_DeletedNullCustomers.resx">
+      <DependentUpon>201808301359281_DeletedNullCustomers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

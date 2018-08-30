@@ -13,10 +13,19 @@ namespace TrashCollector.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+        [Display(Name = "Pickup Day")]
         public DayOfWeek PickupDay { get; set; }
+        [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
+        [Display(Name = "End Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? EndDate { get; set; }
+        [Display(Name = "Money Owed")]
         public double MoneyOwed { get; set; }
 
         [ForeignKey("ApplicationUser")]
