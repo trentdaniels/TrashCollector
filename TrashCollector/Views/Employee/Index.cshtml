@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Pick a day:</label>
                 <div class="col-md-10">
-                    @Html.DropDownList("dayOfWeek", new SelectList(ViewBag.DaysOfWeek), htmlAttributes: new { @class = "form-control", style="display: inline-block;" })
+                    @Html.DropDownList("dayOfWeek", new SelectList(Enum.GetValues(typeof(DayOfWeek))), new { @class = "form-control", style="display: inline-block;" })
                     <input type="submit" value="Search" class="btn btn-primary" />
                 </div>
             </div>
@@ -36,6 +36,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Customers[0].PickupDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers[0].SpecialPickup)
                 </th>
 
             </tr>
@@ -61,13 +64,17 @@
                 <td>
                     @using (Html.BeginForm("Index", "Employee", new { employeeId = Model.Id, id = item.Id }, FormMethod.Post))
                     {
-                        if (item.MoneyOwed == 0)
+                        if (item.MoneyOwed == 0 && item.StartDate <= DateTime.Today && item.EndDate >= DateTime.Today)
                         {
-                            <input type="submit" class="btn btn-primary" value="Confirm Pickup" />
+                            <input type="submit" class="btn btn-success" value="Confirm Pickup" />
+                        }
+                        else if (item.StartDate > DateTime.Today || item.EndDate < DateTime.Today)
+                        {
+                            <input type="submit" class="btn btn-default disabled" disabled value="Pickup Suspended" />
                         }
                         else
                         {
-                            <input type="submit" class="btn btn-success disabled" value="Confirmed Pickup" disabled />
+                            <input type="submit" class="btn btn-default disabled" value="Confirmed Pickup" disabled />
                         }
                     }
                 </td>

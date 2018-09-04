@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201809041530066_Customer.Designer.cs">
       <DependentUpon>201809041530066_Customer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809041720503_SpecialPickup.cs" />
+    <Compile Include="Migrations\201809041720503_SpecialPickup.Designer.cs">
+      <DependentUpon>201809041720503_SpecialPickup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -324,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809041530066_Customer.resx">
       <DependentUpon>201809041530066_Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041720503_SpecialPickup.resx">
+      <DependentUpon>201809041720503_SpecialPickup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

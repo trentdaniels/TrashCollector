@@ -14,7 +14,6 @@ namespace TrashCollector.Controllers
         {
 
             ApplicationDbContext db = new ApplicationDbContext();
-            ViewBag.DaysOfWeek = Enum.GetValues(typeof(DayOfWeek));
             var selectedEmployee = db.Employees.Include("Customers").SingleOrDefault(Employee => Employee.Id == id);
             selectedEmployee.Customers = db.Customers.Distinct().AsEnumerable().Where(Customer => Customer.PickupDay == dayOfWeek).ToList();
             return View(selectedEmployee);
