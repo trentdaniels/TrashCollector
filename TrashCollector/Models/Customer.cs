@@ -28,6 +28,11 @@ namespace TrashCollector.Models
         [Display(Name = "Money Owed")]
         public double MoneyOwed { get; set; }
 
+        [Display(Name = "Special Pickup")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? SpecialPickup { get; set; }
+
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

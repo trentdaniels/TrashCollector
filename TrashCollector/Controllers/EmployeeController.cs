@@ -10,19 +10,33 @@ namespace TrashCollector.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, DayOfWeek? dayOfWeek)
+        {
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            ViewBag.DaysOfWeek = Enum.GetValues(typeof(DayOfWeek));
+            var selectedEmployee = db.Employees.Include("Customers").SingleOrDefault(Employee => Employee.Id == id);
+            selectedEmployee.Customers = db.Customers.Distinct().AsEnumerable().Where(Customer => Customer.PickupDay == dayOfWeek).ToList();
+            return View(selectedEmployee);
+        }
+        [HttpPost]
+        public ActionResult Index(int employeeId, int id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var selectedEmployee = db.Employees.Find(id);
-            var today = DateTime.Today.DayOfWeek;
-            var nearbyCustomers = db.Customers.Where(Customer => Customer.ZipCode == selectedEmployee.ZipCode &&  today == Customer.PickupDay).ToList();
-            return View(nearbyCustomers);
+            var selectedCustomer = db.Customers.Find(id);
+            selectedCustomer.MoneyOwed += 50;
+            db.SaveChanges();
+            return RedirectToAction("Index", new { id = employeeId });
         }
 
+
         // GET: Employee/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int employeeId, int id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var selectedEmployee = db.Employees.Include("Customer").Single(Employee => Employee.Id == employeeId);
+            selectedEmployee.Customer = db.Customers.Find(id);
+            return View(selectedEmployee);
         }
 
         // GET: Employee/Create
@@ -82,27 +96,6 @@ namespace TrashCollector.Controllers
                 return View(employee);
             }
         }
-
-        // GET: Employee/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Employee/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

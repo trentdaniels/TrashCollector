@@ -81,6 +81,7 @@ namespace TrashCollector.Controllers
                 customerInDb.Address = customer.Address;
                 customerInDb.ZipCode = customer.ZipCode;
                 customerInDb.PickupDay = customer.PickupDay;
+                customerInDb.SpecialPickup = customer.SpecialPickup;
                 db.SaveChanges();
                 return RedirectToAction("Index", new { id = customer.Id });
             }

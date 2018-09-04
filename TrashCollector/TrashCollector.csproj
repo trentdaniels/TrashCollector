@@ -206,6 +206,18 @@
     <Compile Include="Migrations\201808301359281_DeletedNullCustomers.Designer.cs">
       <DependentUpon>201808301359281_DeletedNullCustomers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809041417398_UpdateNavigation.cs" />
+    <Compile Include="Migrations\201809041417398_UpdateNavigation.Designer.cs">
+      <DependentUpon>201809041417398_UpdateNavigation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809041441133_CustomerList.cs" />
+    <Compile Include="Migrations\201809041441133_CustomerList.Designer.cs">
+      <DependentUpon>201809041441133_CustomerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809041530066_Customer.cs" />
+    <Compile Include="Migrations\201809041530066_Customer.Designer.cs">
+      <DependentUpon>201809041530066_Customer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -282,6 +294,7 @@
     <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Employee\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -302,6 +315,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808301359281_DeletedNullCustomers.resx">
       <DependentUpon>201808301359281_DeletedNullCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041417398_UpdateNavigation.resx">
+      <DependentUpon>201809041417398_UpdateNavigation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041441133_CustomerList.resx">
+      <DependentUpon>201809041441133_CustomerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041530066_Customer.resx">
+      <DependentUpon>201809041530066_Customer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
