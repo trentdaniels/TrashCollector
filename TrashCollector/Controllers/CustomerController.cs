@@ -61,6 +61,13 @@ namespace TrashCollector.Controllers
             }
         }
 
+        public ActionResult _CustomerLayout(int id)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var customer = db.Customers.Find(id);
+            return View(customer);
+        }
+
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {

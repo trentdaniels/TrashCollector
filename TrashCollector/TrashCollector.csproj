@@ -203,6 +203,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MapsApi.cs" />
     <Compile Include="Migrations\201808301359281_DeletedNullCustomers.cs" />
     <Compile Include="Migrations\201808301359281_DeletedNullCustomers.Designer.cs">
       <DependentUpon>201808301359281_DeletedNullCustomers.cs</DependentUpon>
@@ -300,8 +301,8 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Employee\Details.cshtml" />
-    <Content Include="Views\Shared\_CustomerLayout.cshtml" />
-    <Content Include="Views\Shared\_EmployeeLayout.cshtml" />
+    <Content Include="Views\Customer\_CustomerLayout.cshtml" />
+    <Content Include="Views\Employee\_EmployeeLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
